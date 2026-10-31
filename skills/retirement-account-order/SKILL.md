@@ -2,7 +2,7 @@
 name: retirement-account-order
 description: Build a plan and Excel workbook for which retirement accounts to fill first (401(k), 403(b), 457(b), HSA, Roth or traditional IRA), whether you're on track, and when to start, for households under $200K. Use when someone asks "how do I maximize retirement savings," "401(k) or IRA first," "Roth or traditional," "should I open an IRA," "am I on track for retirement," "am I too late to start," "what do I do with my pension," or "when should I start saving for retirement."
 metadata:
-  version: 1.0.1
+  version: 1.1.0
 ---
 
 # Retirement account order
@@ -58,11 +58,11 @@ Limits and rules change every year. Search for the current year's values; never 
 - Roth IRA income limits by filing status
 - Traditional IRA deduction income limits when the person or their spouse has a workplace plan
 - HSA limits (self-only and family) and HSA catch-up
-- Saver's Credit and Earned Income Tax Credit income limits
+- Saver's Credit or Saver's Match income limits and amounts (the Saver's Match replaces the Saver's Credit for retirement savings starting in 2027), and Earned Income Tax Credit income limits
 - SEP-IRA and Solo 401(k) limits, if self-employed
-- Federal tax brackets and standard deduction for their filing status, and their state's income tax treatment of retirement income
+- Federal tax brackets, standard deduction and the state and local tax deduction cap for their filing status, and their state's income tax treatment of retirement income
 - Social Security rules for public employees who also earn a pension
-- Current income-driven repayment and Public Service Loan Forgiveness rules, if they have federal student loans
+- Current federal student loan repayment plans for their loans and dates (the SAVE plan has ended and the Repayment Assistance Plan launched July 1, 2026), which plans count toward Public Service Loan Forgiveness, and whether forgiven balances are taxable
 - A published savings-by-age benchmark and a published retirement income replacement guideline, for the on-track check
 - What counts as a high fund fee (expense ratio), from a published source
 
@@ -106,12 +106,13 @@ Then compare fairly, with their numbers:
 - **Today's bracket vs. an estimated retirement bracket.** Estimate retirement income from savings, pension and Social Security, then find the bracket that income lands in. Many retirees pay a lower rate than they did while working, which favors traditional more often than people expect.
 - **Invest the difference.** A fair comparison assumes the tax break from a traditional contribution gets invested too. Show both accounts growing on that basis.
 - **State taxes.** Include their state's tax on retirement income, and note that moving states in retirement changes the math.
-- **Credits.** Traditional contributions lower taxable income, which can raise the Saver's Credit or Earned Income Tax Credit. Show the dollar difference if it applies.
-- **Student loans.** On income-driven repayment, traditional contributions lower the income the payment is based on, which lowers the payment. For someone working toward Public Service Loan Forgiveness, that can mean more forgiven. Show the payment difference using current rules.
+- **Credits and the Saver's Match.** Traditional contributions lower taxable income, which can raise the Earned Income Tax Credit. Starting in 2027, the Saver's Match deposits money only into traditional (pre-tax) accounts, not Roth IRAs, so a lower earner who qualifies may get more by putting at least enough into a traditional account to receive the full match. Show the dollar difference if it applies.
+- **Student loans.** On an income-driven plan, including the Repayment Assistance Plan, traditional contributions lower the income the payment is based on, which lowers the payment. For someone working toward Public Service Loan Forgiveness on a plan that counts, that can mean more forgiven. Show the payment difference using current rules.
 
 Then lean, plainly:
 
-- **Low bracket now and no student loan effect** (students, early career, low earners): Roth usually wins.
+- **Low bracket now, no student loan effect, and not eligible for the Saver's Match** (students, early career, low earners): Roth usually wins.
+- **Eligible for the Saver's Match:** traditional up to the amount that earns the full match, then Roth for the rest.
 - **Middle or higher bracket for this range, a pension coming, or on income-driven repayment:** traditional or a split often wins. Show why with their numbers.
 - **Unsure:** splitting between both is a reasonable hedge.
 

@@ -1,5 +1,11 @@
 # Versions
 
+## 1.2.0 — October 31, 2026
+
+- Both retirement skills now account for the Saver's Match, which replaces the Saver's Credit for retirement savings in 2027 and goes only into traditional accounts, so it can change the Roth vs. traditional answer for lower earners
+- Student loan guidance updated for 2026: the SAVE plan has ended, the Repayment Assistance Plan launched, some plans don't count toward Public Service Loan Forgiveness, and forgiven balances may be taxable
+- **retirement-debt-balance** now separates true 0% promo rates from deferred-interest offers, checks for the Trump Account starting deposit for kids born 2025 or later, and asks whether the household itemizes instead of assuming
+
 ## 1.1.1 — October 31, 2026
 
 - **retirement-account-order** now covers the limits of the government 457(b) penalty-free exception (rolled-in money, rollovers out to an IRA), separates nonprofit 457(b)s, adds the 457(b) special catch-up, and applies the 15-year 403(b) catch-up before the age-50 catch-up

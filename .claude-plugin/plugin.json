@@ -1,7 +1,7 @@
 {
   "name": "money-ops-skills",
   "description": "Household money skills for AI agents — balancing retirement saving, debt, emergency funds, and goals, for households earning under $200K",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "author": {
     "name": "Charlene Strain"
   },

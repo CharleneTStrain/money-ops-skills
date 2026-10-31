@@ -2,7 +2,7 @@
 name: retirement-debt-balance
 description: Build a priority ladder and Excel workbook showing where each dollar should go between retirement saving, debt payoff, an emergency fund, kids' college, and other goals, for households earning under $200K a year. Use when someone asks "should I pay off debt or save for retirement," "where should my extra money go," "am I saving enough," "should I take the 401(k) match or pay down my card," or wants a plan for balancing money priorities.
 metadata:
-  version: 1.0.1
+  version: 1.1.0
 ---
 
 # Balancing retirement saving, debt and other priorities
@@ -32,7 +32,7 @@ Use this table to pick starting defaults. It is for you, not the reader: never t
 
 | Household income | Starter emergency fund | Retirement target | Roth lean |
 |---|---|---|---|
-| Under about $60K | $500, then one month of essentials | Full match, then add 1% of pay with each raise | Strong Roth |
+| Under about $60K | $500, then one month of essentials | Full match, then add 1% of pay with each raise | Roth, unless the Saver's Match applies (see Roth or traditional) |
 | About $60K–$120K | One month of essentials | 10–15% of gross pay, including match | Roth |
 | About $120K–$200K | One month of essentials | 15% of gross pay, including match | Roth or split; check bracket |
 
@@ -59,7 +59,8 @@ Ask only for what is still missing, grouped, not one question at a time. If they
 - **Household:** one or two earners? For two earners, collect pay, pay frequency and employer plan for each, and whether each debt is joint or belongs to one person.
 - **Income:** gross and take-home for each earner, and whether income is steady or irregular. For irregular income, ask for a low month, not an average.
 - **Expenses:** essentials, including childcare.
-- **Debts:** type, balance, rate, minimum payment, promo rate end date; for student loans, federal or private, and whether they are still in school or in a grace period.
+- **Debts:** type, balance, rate, minimum payment, and for promo rates the end date and whether it's a true 0% rate or "no interest if paid in full" (deferred interest); for student loans, federal or private, the repayment plan they're on, when the loans were taken out, whether they're still in school or in a grace period, and whether they're working toward Public Service Loan Forgiveness.
+- **Kids:** birth years, and for any born 2025 or later, whether the family has claimed the government's starting deposit in a Trump Account.
 - **Employer plans:** match formula, vesting schedule, whether the match is paid per paycheck, HSA eligibility, dependent care FSA.
 - **People depending on them:** number and ages of kids or other dependents, and current life and disability insurance (through work or their own).
 - **Age** of each earner.
@@ -74,10 +75,11 @@ Limits and programs change every year. Search for the current year's values; nev
 - IRA limit and Roth IRA income limits (single filers at higher incomes in this range can hit these)
 - HSA and dependent care FSA limits
 - SEP-IRA and Solo 401(k) limits, if self-employed
-- Federal tax brackets and the standard deduction
+- Federal tax brackets, the standard deduction, and the current cap on state and local tax deductions
 - Student loan interest deduction income limits (it phases out partway through this audience's range)
-- Federal student loan repayment plans, forgiveness programs and in-school interest rules
-- Earned Income Tax Credit, Child Tax Credit and Saver's Credit income limits and amounts, by filing status and number of kids
+- Federal student loan repayment plans available for their loans and dates (the SAVE plan has ended; the Repayment Assistance Plan launched July 1, 2026; other plans are being phased out), which plans count toward Public Service Loan Forgiveness, whether forgiven balances are taxable, and in-school interest rules
+- Earned Income Tax Credit, Child Tax Credit, and Saver's Credit or Saver's Match income limits and amounts, by filing status and number of kids
+- Trump Account rules: which birth years get the government's starting deposit, how to claim it, and the yearly contribution limit
 - Income limits for SNAP, WIC, and Medicaid or CHIP in their state, when they may be close
 
 Every figure goes in the workbook's Limits & Sources tab with the year, the source name and the link. Cite the most useful sources in chat too.
@@ -86,8 +88,8 @@ Every figure goes in the workbook's Limits & Sources tab with the year, the sour
 
 If take-home pay does not cover essential expenses plus minimum debt payments, do not build the ladder yet. Build the shortfall plan instead:
 
-1. **Benefits and credits to check.** Using the looked-up limits, list what they may qualify for: Earned Income Tax Credit, Child Tax Credit, Saver's Credit, SNAP, WIC, Medicaid or CHIP, utility assistance and childcare subsidies. Say "you may qualify" and link to the official place to check; never promise eligibility.
-2. **Lower-cost debt options.** Contacting lenders about hardship plans, and federal student loan income-driven repayment if it applies.
+1. **Benefits and credits to check.** Using the looked-up limits, list what they may qualify for: Earned Income Tax Credit, Child Tax Credit, Saver's Credit or Saver's Match, the Trump Account starting deposit for kids born 2025 or later, SNAP, WIC, Medicaid or CHIP, utility assistance and childcare subsidies. Say "you may qualify" and link to the official place to check; never promise eligibility.
+2. **Lower-cost debt options.** Contacting lenders about hardship plans, and an income-driven federal student loan plan if one is available for their loans.
 3. **Nonprofit credit counseling.** Point to an agency affiliated with the National Foundation for Credit Counseling if payments are unmanageable or debt is in collections.
 4. **A starter goal that fits.** Even $10–$25 a paycheck toward a small cash cushion, stated as progress, not a failure to hit a bigger number.
 
@@ -105,18 +107,19 @@ Fund each rung before moving extra money down, unless a note says otherwise. For
 6. **Full emergency fund.** Three months of essentials for steady income; six or more for irregular income, a single earner with dependents, or an unstable job.
 7. **Retirement saving beyond the match.** HSA if eligible, then an IRA, then more into the workplace plan, up to the retirement target. State that the target is on gross pay, not take-home, and show both numbers.
 8. **Moderate-rate debt (between the two thresholds, default 4–8%).** A judgment call. Show both paths: extra payments earn a guaranteed return equal to the debt's rate; investing earns a higher expected but uncertain return. Splitting is a reasonable middle.
-9. **Kids' college and other dated goals.** Say plainly that retirement usually comes first, because students can borrow for school and nobody can borrow for retirement. Once retirement is on track, a 529 plan is the common college account. Money needed within about five years stays in cash or similar low-risk savings.
+9. **Kids' college and other dated goals.** Say plainly that retirement usually comes first, because students can borrow for school and nobody can borrow for retirement. Once retirement is on track, a 529 plan is the common college account. For kids born 2025 or later, make sure the family has claimed the government's starting deposit in a Trump Account, since it's free money; note that the account is locked until 18 and follows retirement-account rules after that, so a 529 is usually the better place for college savings. Money needed within about five years stays in cash or similar low-risk savings.
 10. **Low-rate debt (below the low threshold, default 4%).** Extra payments here mostly buy peace of mind; let the person weigh that.
 
 ### Comparing debt and saving fairly
 
-Most households in this range take the standard deduction, so use each debt's sticker rate by default. Lower it only when a deduction actually applies: the household itemizes (then mortgage interest counts), or they are under the student loan interest deduction's income limit. Show the adjusted rate next to the sticker rate when you use it.
+Use each debt's sticker rate by default, since most households in this range take the standard deduction. Ask whether they itemize rather than assuming: the higher cap on state and local tax deductions means more homeowners in high-tax states now do. Lower the rate only when a deduction actually applies: the household itemizes (then mortgage interest counts), or they are under the student loan interest deduction's income limit. Show the adjusted rate next to the sticker rate when you use it.
 
 ### Roth or traditional
 
 Most of this audience is in a lower or middle tax bracket, so lean Roth by default, following the starting defaults. Explain the choice in one or two sentences: Roth means paying tax now and withdrawing tax-free later; traditional means a tax break now and paying tax later.
 
 - Under about $120K, or young and early career: Roth, and say so plainly.
+- **Exception, starting in 2027:** if their income qualifies for the Saver's Match, it's deposited only into traditional (pre-tax) accounts. Putting at least enough into a traditional account to get the full match can beat Roth. Show both, with the looked-up match amount.
 - Higher incomes in this range: look up the bracket. If they are in the higher brackets for this range, traditional or a split is reasonable. Single filers may also be over the Roth IRA income limit; if so, say they can still use a Roth option in a workplace plan if one is offered.
 
 Mention that Roth IRA contributions (not earnings) can be withdrawn without penalty, which gives some backup flexibility.
@@ -134,8 +137,8 @@ Show the difference in total interest and payoff date. If the gap is small, say 
 
 Raise any that apply:
 
-- **0% promo balances:** pay minimums until shortly before the promo ends, then clear it, or deferred interest may hit.
-- **Federal student loans:** income-driven plans and forgiveness can make fast payoff the wrong move. For students still in school, show the interest building up on unsubsidized loans, and suggest paying that interest during school if they can.
+- **Promo rates:** tell the two kinds apart. A true 0% intro rate charges interest only on what's left when the promo ends, so paying minimums and clearing it before the end date is reasonable. A "no interest if paid in full" offer (deferred interest, common on store cards) charges all the interest back to the purchase date if even a dollar is left, so it goes ahead of other high-interest debt as the end date gets close.
+- **Federal student loans:** the plans changed in 2026. Check which plan they're on and which plans their loans qualify for. Anyone still in the SAVE plan needs to choose a new plan, or they'll be moved automatically. For someone working toward Public Service Loan Forgiveness, confirm their plan counts; some new plans don't. Income-driven plans and forgiveness can still make fast payoff the wrong move, but forgiven balances outside Public Service Loan Forgiveness may now be taxable, so include that in the comparison. For students still in school, show the interest building up on unsubsidized loans, and suggest paying that interest during school if they can.
 - **401(k) loans and early withdrawals:** a last resort. Taxes, penalties and lost growth usually outweigh the benefit.
 - **Self-employed or no workplace plan:** no match rung; cover IRA, SEP-IRA or Solo 401(k) options.
 - **Irregular or changing income** (students, gig work, commission): plan on a low month; size the emergency fund from that.
