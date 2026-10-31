@@ -2,7 +2,7 @@
 name: money-ops-context
 description: Create or update the household money context file every other skill in this library reads first — who is in the household, income and pay schedule, essential expenses, debts, savings and retirement accounts, employer benefits, insurance, and goals. Use at the start before using other money ops skills, when someone says "set up my money context," "here's my financial situation," "remember my debts," "update my numbers," or "I got a raise," or whenever a skill keeps asking for the same background. It creates `.agents/money-ops-context.md`.
 metadata:
-  version: 1.0.1
+  version: 1.0.2
 ---
 
 # Money ops context
@@ -112,3 +112,4 @@ Every skill in this library reads this file first. The ones that lean on it most
 
 - **retirement-debt-balance** — uses every section to build the priority ladder and workbook, and suggests updates when the numbers change
 - **retirement-account-order** — uses Income, Employer benefits and Savings and accounts to put retirement accounts in order
+- **market-downturn-plan** — uses Savings and accounts, Insurance and Goals to sort money by when it's needed and check risks

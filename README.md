@@ -29,23 +29,26 @@ A skill is a markdown file of instructions an AI agent follows for one specific 
 Everything starts with **money-ops-context**. Run it once and it writes `.agents/money-ops-context.md`: who's in your household, what you earn and how often you're paid, your essential expenses, debts, accounts, employer benefits, insurance, and goals. Every other skill reads that file first, so it only asks you for what's specific to the question. It never stores account numbers, Social Security numbers, or passwords.
 
 ```
-          ┌──────────────────────────────────────┐
-          │           money-ops-context          │
-          │    (read by every other skill first) │
-          └───────────────────┬──────────────────┘
-                              │
-                              ▼
-                ┌───────────────────────────┐
-                │      Saving and debt      │
-                ├───────────────────────────┤
-                │  retirement-debt-balance  │
-                │  retirement-account-order │
-                └───────────────────────────┘
+              ┌──────────────────────────────────────┐
+              │           money-ops-context          │
+              │    (read by every other skill first) │
+              └───────────────────┬──────────────────┘
+                                  │
+                 ┌────────────────┴────────────────┐
+                 ▼                                 ▼
+   ┌───────────────────────────┐     ┌───────────────────────────┐
+   │      Saving and debt      │     │   Protecting what you     │
+   │                           │     │        have saved         │
+   ├───────────────────────────┤     ├───────────────────────────┤
+   │  retirement-debt-balance  │     │   market-downturn-plan    │
+   │  retirement-account-order │     │                           │
+   └───────────────────────────┘     └───────────────────────────┘
 ```
 
-Skills hand off to each other. The chain that comes up most:
+Skills hand off to each other. The chains that come up most:
 
 - **Retirement and debt balance → Retirement account order:** decide whether retirement is the next step, then decide which accounts to fill
+- **Retirement account order → Market downturn plan:** fill the right accounts, then set rules for what you'll do when the market drops
 
 Each skill ends with a **Related skills** section naming what it hands off to and why.
 
@@ -72,6 +75,14 @@ Deciding where each dollar goes when everything feels urgent.
 |---|---|---|
 | [Retirement and debt balance](skills/retirement-debt-balance/) | Builds a priority ladder for retirement saving, debt payoff, an emergency fund, kids' college, and other goals | Excel workbook: ladder, per-paycheck amounts, payoff schedule, assumptions, monthly check-in |
 | [Retirement account order](skills/retirement-account-order/) | Puts your 401(k), 403(b), 457(b), HSA and IRA in order, compares Roth and traditional, and checks whether you're on track | Excel workbook: account order per paycheck, Roth vs. traditional, on-track check, start-now calculator |
+
+### Protecting what you've saved
+
+Keeping savings, retirement accounts and income safe when markets fall or the economy gets shaky.
+
+| Skill | What it does | Output |
+|---|---|---|
+| [Market downturn plan](skills/market-downturn-plan/) | Sorts your money by when you need it, checks the risks that hurt people in a downturn, and writes your own rules for a market drop | Excel workbook: three buckets, drop test, risk check, who-to-call sheet, check-in alerts, plus signed "My investment rules" |
 
 More skills coming.
 
@@ -148,6 +159,9 @@ Once installed, ask in plain words:
 
 "I'm 54 and 10 years from retiring. Am I on track?"
 → retirement-account-order
+
+"The market is dropping. Should I sell my 401(k)?"
+→ market-downturn-plan
 ```
 
 Or call one directly:
@@ -156,6 +170,7 @@ Or call one directly:
 /money-ops-context
 /retirement-debt-balance
 /retirement-account-order
+/market-downturn-plan
 ```
 
 ## Contributing

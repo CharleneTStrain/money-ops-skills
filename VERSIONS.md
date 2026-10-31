@@ -1,5 +1,10 @@
 # Versions
 
+## 1.3.0 — October 31, 2026
+
+- New skill, **market-downturn-plan**: sorts savings into three buckets by when the money is needed, checks downturn risks (income loss, concentration, speculation, insurance gaps, fraud), runs drop tests including stocks and bonds falling together, and writes signed "My investment rules," delivered as an Excel workbook
+- The other skills link to it in their Related skills
+
 ## 1.2.0 — October 31, 2026
 
 - Both retirement skills now account for the Saver's Match, which replaces the Saver's Credit for retirement savings in 2027 and goes only into traditional accounts, so it can change the Roth vs. traditional answer for lower earners

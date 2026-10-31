@@ -2,7 +2,7 @@
 name: retirement-account-order
 description: Build a plan and Excel workbook for which retirement accounts to fill first (401(k), 403(b), 457(b), HSA, Roth or traditional IRA), whether you're on track, and when to start, for households under $200K. Use when someone asks "how do I maximize retirement savings," "401(k) or IRA first," "Roth or traditional," "should I open an IRA," "am I on track for retirement," "am I too late to start," "what do I do with my pension," or "when should I start saving for retirement."
 metadata:
-  version: 1.1.0
+  version: 1.1.1
 ---
 
 # Retirement account order
@@ -213,3 +213,4 @@ If the person gave numbers the context file doesn't have, offer to update `.agen
 
 - **money-ops-context** — reads the household's numbers first, and takes back any updates
 - **retirement-debt-balance** — decides whether retirement, debt or the emergency fund comes first; this skill takes over once retirement is the next step
+- **market-downturn-plan** — sorts savings by when they're needed and sets rules for a market drop
