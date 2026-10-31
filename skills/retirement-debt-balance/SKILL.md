@@ -1,6 +1,8 @@
 ---
 name: retirement-debt-balance
-description: Use when someone in a household earning under $200K a year asks how to split money between retirement saving, debt, an emergency fund, kids' college and other goals.
+description: Build a priority ladder and Excel workbook showing where each dollar should go between retirement saving, debt payoff, an emergency fund, kids' college, and other goals, for households earning under $200K a year. Use when someone asks "should I pay off debt or save for retirement," "where should my extra money go," "am I saving enough," "should I take the 401(k) match or pay down my card," or wants a plan for balancing money priorities.
+metadata:
+  version: 1.0.0
 ---
 
 # Balancing retirement saving, debt and other priorities
@@ -13,9 +15,13 @@ This is financial education, not financial advice. Lay out the trade-offs and th
 
 Use plain language throughout, in chat and in the workbook. Define terms like "vesting," "Roth" or "match" the first time they appear. Never sound judgmental about how much someone earns, owes or has saved.
 
+## Before you start
+
+If `.agents/money-ops-context.md` exists (or `.claude/money-ops-context.md`), read it first. Use the household, income, pay schedule, expenses, debts, accounts, benefits, and goals it already has, confirm anything that looks out of date, and only ask for what's missing. If it doesn't exist, go ahead with what you're given, and suggest running **money-ops-context** once so the next skill doesn't have to ask.
+
 ## 1. Household income first
 
-Ask for total household income before tax, all earners combined, and how many people live in the household. A range is fine.
+If the context file has household income and household size, use them. Otherwise ask for total household income before tax, all earners combined, and how many people live in the household. A range is fine.
 
 - **Under $200K:** continue.
 - **$200K or more:** say this guide is built for households under $200K. Give the general order of priorities from the ladder below in a few sentences, without a workbook, and suggest a fee-only fiduciary planner for the details.
@@ -36,7 +42,7 @@ Use this table to pick starting defaults. It is for you, not the reader: never t
 
 ## 2. Quick answer
 
-Ask for five more things:
+Ask for whichever of these five the context file doesn't already have:
 
 - Take-home pay, and how often each earner is paid (weekly, every two weeks, twice a month, monthly, irregular)
 - Essential monthly expenses, roughly
@@ -169,6 +175,8 @@ In chat:
 4. When to see a professional: running a business, an inheritance or other windfall, complex tax questions, or within about ten years of retiring. Suggest a fee-only fiduciary planner.
 5. The workbook, and the sources worth citing.
 
+If the person gave numbers the context file doesn't have, or that differ from it (a new debt, a raise, a paid-off card), offer to update `.agents/money-ops-context.md` so the next skill starts current.
+
 ## Rules
 
 - Use their numbers. A ladder with no dollar amounts is not finished.
@@ -177,3 +185,7 @@ In chat:
 - Never label the person by income group. Describe their plan, not their bracket.
 - Present judgment calls (moderate-rate debt, avalanche vs. snowball, Roth vs. traditional at higher incomes) as choices with trade-offs.
 - Never imply someone is behind or doing it wrong. State where they are and the next step.
+
+## Related skills
+
+- **money-ops-context** — reads the household's numbers first, and takes back any updates this skill learns

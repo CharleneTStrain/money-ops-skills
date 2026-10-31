@@ -1,0 +1,31 @@
+name: Publish release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version from VERSIONS.md, like 1.0.1"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Pull this version's notes from VERSIONS.md
+        run: |
+          v="${{ inputs.version }}"
+          awk -v v="$v" '
+            $0 ~ "^## " v " " {on=1; sub(/^## /,""); print "# " $0; next}
+            /^## / && on {exit}
+            on {print}
+          ' VERSIONS.md > notes.md
+          [ -s notes.md ] || echo "See VERSIONS.md." > notes.md
+          sed -n '1p' notes.md | sed 's/^# //' > title.txt
+      - name: Create the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "v${{ inputs.version }}" --target "$GITHUB_SHA" --title "v$(cat title.txt)" --notes-file notes.md --latest

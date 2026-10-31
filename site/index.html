@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Open-source household money skills for Claude Code and other AI agents: where your next dollar should go between retirement, debt, an emergency fund, and goals. For households earning under $200K.">
+<meta property="og:title" content="Money Ops Skills for AI Agents">
+<meta property="og:description" content="Open-source household money skills for Claude Code and other AI agents.">
+<meta property="og:image" content="https://charlenetstrain.github.io/money-ops-skills/icon.png">
+<link rel="icon" type="image/png" href="icon.png">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Money Ops Skills</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a drafting sheet — grid ground, title block footer, sheet labels on each section; boxes coded gray = agent, rust = handoff, black = people */
+:root{
+  --paper:#F3F0EA; --grid:#E6E1D7; --grid-major:#D9D2C5;
+  --ink:#1A1816; --ink-2:#55504A; --rule:#CFC7B9;
+  --rust:#B8552C; --rust-ink:#FFFFFF; --agent:#D6CFC3; --panel:#FBFAF7; --black:#1A1816; --on-black:#F3F0EA;
+  --sans:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --track:.14em;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#161412; --grid:#211E1B; --grid-major:#2C2824; --ink:#EEE9E1; --ink-2:#ADA59A; --rule:#3A352F;
+  --rust:#D46A3D; --rust-ink:#160D08; --agent:#3E3934; --panel:#1E1B18; --black:#EEE9E1; --on-black:#161412; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#161412; --grid:#211E1B; --grid-major:#2C2824; --ink:#EEE9E1; --ink-2:#ADA59A; --rule:#3A352F;
+  --rust:#D46A3D; --rust-ink:#160D08; --agent:#3E3934; --panel:#1E1B18; --black:#EEE9E1; --on-black:#161412; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font:400 16px/1.55 var(--sans);
+  background-image:linear-gradient(var(--grid-major) 1px,transparent 1px),linear-gradient(90deg,var(--grid-major) 1px,transparent 1px),linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:120px 120px,120px 120px,24px 24px,24px 24px}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.caps{text-transform:uppercase;letter-spacing:var(--track)}
+.mono{font-family:var(--mono)}
+.label{font:500 11px/1.4 var(--mono);text-transform:uppercase;letter-spacing:.12em;color:var(--ink-2)}
+:focus-visible{outline:2px solid var(--rust);outline-offset:2px}
+
+/* header */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);border-bottom:1px solid var(--ink)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+.bar{display:flex;align-items:center;gap:24px;padding-block:14px;flex-wrap:wrap}
+.mark{font:600 13px/1 var(--sans);text-transform:uppercase;letter-spacing:.2em;text-decoration:none;display:flex;align-items:center;gap:10px}
+.mark i{display:inline-flex;gap:3px}.mark i b{width:9px;height:9px;display:block}
+.nav{display:flex;gap:20px;margin-left:auto;flex-wrap:wrap}
+.nav a{font:500 12px/1 var(--sans);text-transform:uppercase;letter-spacing:.14em;text-decoration:none;color:var(--ink-2)}
+.nav a:hover{color:var(--ink)}
+.nav a.gh{color:var(--ink);border:1px solid var(--ink);padding:7px 10px}
+
+section{padding-block:72px;border-bottom:1px solid var(--rule)}
+.sheet{display:flex;justify-content:space-between;gap:16px;margin-bottom:28px;flex-wrap:wrap}
+h2{font:600 clamp(22px,3.2vw,30px)/1.2 var(--sans);text-transform:uppercase;letter-spacing:.12em;margin:0;text-wrap:balance}
+h2 em{font-style:normal;color:var(--rust)}
+.lede{max-width:62ch;color:var(--ink-2);margin:12px 0 0}
+
+/* hero */
+.hero{padding-block:72px 56px}
+.hero h1{font:600 clamp(34px,7vw,76px)/1.02 var(--sans);text-transform:uppercase;letter-spacing:.1em;margin:18px 0 0;text-wrap:balance}
+.hero h1 span{display:block;color:var(--rust)}
+.hero p.sub{font-size:clamp(17px,2vw,20px);max-width:58ch;margin:24px 0 32px}
+.term{background:var(--black);color:var(--on-black);font:400 14px/1.6 var(--mono);max-width:720px;border:1px solid var(--black)}
+.term .top{display:flex;justify-content:space-between;align-items:center;padding:8px 14px;border-bottom:1px solid color-mix(in srgb,var(--on-black) 20%,transparent);font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.75}
+.term .body{padding:16px;overflow-x:auto}
+.term .line{white-space:nowrap}
+.term .ok{color:var(--rust)}
+.copy{font:500 11px/1 var(--mono);text-transform:uppercase;letter-spacing:.1em;background:transparent;color:inherit;border:1px solid currentColor;padding:6px 9px;cursor:pointer}
+.copy:hover{background:var(--rust);border-color:var(--rust);color:var(--rust-ink)}
+.cta{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
+.btn{font:600 12px/1 var(--sans);text-transform:uppercase;letter-spacing:.14em;text-decoration:none;padding:14px 18px;border:1px solid var(--ink)}
+.btn.solid{background:var(--rust);border-color:var(--rust);color:var(--rust-ink)}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:2px 2px 0 var(--ink)}
+.specs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--ink);margin-top:48px;background:var(--panel)}
+.specs div{padding:14px 16px;border-right:1px solid var(--ink)}
+.specs div:last-child{border-right:0}
+.specs strong{display:block;font:600 26px/1.1 var(--sans);font-variant-numeric:tabular-nums}
+@media (max-width:640px){.specs{grid-template-columns:repeat(2,minmax(0,1fr))}.specs div:nth-child(2){border-right:0}.specs div:nth-child(-n+2){border-bottom:1px solid var(--ink)}}
+
+/* how it works diagram */
+.diagram{overflow-x:auto;border:1px solid var(--ink);background:var(--panel);padding:28px}
+@media (max-width:640px){.diagram{padding:16px}}
+.dg{display:grid;gap:0}
+.ctx{justify-self:center;width:min(420px,100%);box-sizing:border-box;background:var(--black);color:var(--on-black);padding:16px 18px;text-align:center}
+.ctx b{font:600 13px/1.3 var(--sans);text-transform:uppercase;letter-spacing:.16em;display:block}
+.ctx small{font:400 12px/1.4 var(--mono);opacity:.8}
+.wires{height:44px;position:relative}
+.wires svg{position:absolute;inset:0;width:100%;height:100%}
+.cols{display:grid;grid-template-columns:minmax(0,320px);justify-content:center;gap:10px}
+.col{border:1px solid var(--ink);background:var(--paper)}
+.col h3{margin:0;padding:10px;font:600 11px/1.3 var(--sans);text-transform:uppercase;letter-spacing:.12em;background:var(--agent);border-bottom:1px solid var(--ink);min-height:52px}
+.col ul{list-style:none;margin:0;padding:8px 10px;display:grid;gap:4px}
+.col li button{all:unset;cursor:pointer;font:400 12px/1.35 var(--mono);color:var(--ink-2)}
+.col li button:hover,.col li button:focus-visible{color:var(--rust);text-decoration:underline}
+.chains{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin-top:28px}
+.chain{border:1px solid var(--ink);background:var(--panel);padding:14px}
+.chain .flow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:8px 0}
+.chain .node{font:500 12px/1.2 var(--mono);padding:6px 8px;background:var(--agent);border:1px solid var(--ink);cursor:pointer}
+.chain .node:hover{background:var(--rust);color:var(--rust-ink);border-color:var(--rust)}
+.chain .arr{font:500 14px/1 var(--mono);color:var(--rust)}
+.chain p{margin:0;color:var(--ink-2);font-size:14px}
+
+/* rules */
+.rules{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border:1px solid var(--ink)}
+.rule{padding:22px 18px;border-right:1px solid var(--ink);background:var(--panel);display:flex;flex-direction:column;gap:10px}
+.rule:last-child{border-right:0;background:var(--black);color:var(--on-black)}
+.rule:last-child .label{color:inherit;opacity:.7}
+.rule h3{margin:0;font:600 16px/1.3 var(--sans);text-wrap:balance}
+.rule p{margin:0;font-size:14px;color:inherit;opacity:.8}
+@media (max-width:820px){.rules{grid-template-columns:1fr 1fr}.rule:nth-child(2){border-right:0}.rule:nth-child(-n+2){border-bottom:1px solid var(--ink)}}
+@media (max-width:480px){.rules{grid-template-columns:1fr}.rule{border-right:0;border-bottom:1px solid var(--ink)}.rule:last-child{border-bottom:0}}
+
+/* library */
+.tools{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:20px}
+.chip{font:500 11px/1 var(--sans);text-transform:uppercase;letter-spacing:.12em;padding:9px 11px;border:1px solid var(--ink);background:var(--panel);cursor:pointer;color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.chip .n{font-family:var(--mono);opacity:.6;margin-left:6px}
+.search{margin-left:auto;font:400 14px/1 var(--mono);padding:9px 12px;border:1px solid var(--ink);background:var(--panel);color:var(--ink);min-width:0;width:240px}
+@media (max-width:640px){.search{margin-left:0;width:100%}}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.card{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:8px;padding:16px;border:1px solid var(--ink);background:var(--panel);min-width:0}
+.card:hover,.card:focus-visible{box-shadow:4px 4px 0 var(--rust);transform:translate(-2px,-2px)}
+.card .id{font:500 12px/1.3 var(--mono);color:var(--rust);word-break:break-word}
+.card h3{margin:0;font:600 16px/1.3 var(--sans)}
+.card p{margin:0;font-size:14px;color:var(--ink-2)}
+.card .cat{margin-top:auto;padding-top:8px}
+.card.start{background:var(--black);color:var(--on-black)}
+.card.start p,.card.start .label{color:inherit;opacity:.8}
+.empty{padding:28px;border:1px dashed var(--ink);text-align:center;color:var(--ink-2)}
+
+/* detail drawer */
+.scrim{position:fixed;inset:0;background:color-mix(in srgb,var(--ink) 35%,transparent);z-index:20}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(560px,100%);background:var(--paper);border-left:1px solid var(--ink);z-index:21;overflow-y:auto;
+  padding:calc(24px + env(safe-area-inset-top,0px)) max(24px,env(safe-area-inset-right,0px)) calc(32px + env(safe-area-inset-bottom,0px)) 24px}
+.drawer .x{position:absolute;top:calc(16px + env(safe-area-inset-top,0px));right:max(16px,env(safe-area-inset-right,0px))}
+.drawer h2{font-size:22px;margin-top:6px;padding-right:72px}
+.drawer .id{font:500 13px/1.3 var(--mono);color:var(--rust);margin-top:10px}
+.dl{display:grid;gap:0;border:1px solid var(--ink);margin-top:22px;background:var(--panel)}
+.dl div{padding:12px 14px;border-bottom:1px solid var(--rule)}
+.dl div:last-child{border-bottom:0}
+.dl p{margin:4px 0 0;font-size:15px}
+.rel{display:grid;gap:8px;margin-top:10px}
+.rel button{all:unset;cursor:pointer;display:flex;gap:10px;align-items:baseline;padding:10px 12px;border:1px solid var(--ink);background:var(--panel)}
+.rel button:hover,.rel button:focus-visible{border-color:var(--rust);box-shadow:3px 3px 0 var(--rust)}
+.rel b{font:500 12px/1.3 var(--mono);color:var(--rust);white-space:nowrap}
+.rel span{font-size:14px;color:var(--ink-2)}
+.cmd{display:flex;align-items:center;gap:10px;justify-content:space-between;background:var(--black);color:var(--on-black);padding:12px 14px;margin-top:10px}
+.cmd code{font:400 13px/1.4 var(--mono);overflow-x:auto;white-space:nowrap;min-width:0}
+.drawer h4{margin:26px 0 0}
+
+/* install */
+.tabs{display:flex;border:1px solid var(--ink);border-bottom:0;flex-wrap:wrap;background:var(--panel)}
+.tab{font:600 11px/1 var(--sans);text-transform:uppercase;letter-spacing:.12em;padding:14px 16px;border:0;border-right:1px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--paper)}
+.panel{border:1px solid var(--ink);background:var(--panel);padding:20px}
+.panel p{margin:0 0 12px;max-width:62ch}
+.panel pre{margin:0 0 14px;background:var(--black);color:var(--on-black);padding:14px 16px;font:400 13px/1.7 var(--mono);overflow-x:auto;position:relative}
+.panel pre .c{opacity:.55}
+.panel .copy{position:absolute;top:10px;right:10px}
+.use{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:36px}
+.ask{border:1px solid var(--ink);background:var(--panel);padding:16px;display:flex;flex-direction:column;gap:10px}
+.ask q{font-size:15px;quotes:"\201C" "\201D"}
+.ask .to{font:500 12px/1.3 var(--mono);color:var(--rust)}
+
+/* footer title block */
+footer{padding-block:56px calc(56px + env(safe-area-inset-bottom,0px))}
+.tb{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;border:1px solid var(--ink);background:var(--panel)}
+.tb>div{padding:16px;border-right:1px solid var(--ink);display:flex;flex-direction:column;gap:6px;min-width:0}
+.tb>div:last-child{border-right:0}
+.tb strong{font:600 14px/1.3 var(--sans);text-transform:uppercase;letter-spacing:.12em}
+.tb a{font-size:14px;text-decoration:none;border-bottom:1px solid var(--rule);width:fit-content}
+.tb a:hover{border-color:var(--rust);color:var(--rust)}
+@media (max-width:760px){.tb{grid-template-columns:1fr 1fr}.tb>div:nth-child(2){border-right:0}.tb>div:nth-child(-n+2){border-bottom:1px solid var(--ink)}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}.card:hover,.btn:hover{transform:none}}
+</style>
+
+</head>
+<body>
+<header><div class="wrap bar">
+  <a class="mark" href="#top"><i aria-hidden="true"><b style="background:var(--agent)"></b><b style="background:var(--rust)"></b><b style="background:var(--black)"></b></i>Money Ops Skills</a>
+  <nav class="nav" aria-label="Sections">
+    <a href="#how">How it works</a><a href="#library">Skills</a><a href="#install">Install</a>
+    <a class="gh" href="https://github.com/CharleneTStrain/money-ops-skills" target="_blank" rel="noopener">GitHub ↗</a>
+  </nav>
+</div></header>
+
+<main id="top">
+<section class="hero"><div class="wrap">
+  <div class="sheet"><span class="label">Sheet 01 · Overview</span><span class="label">v1.0.0 · MIT · Oct 2026</span></div>
+  <h1>Money ops skills<span>for AI agents</span></h1>
+  <p class="sub">Open-source skills for everyday household money decisions: where your next dollar should go between retirement, debt, an emergency fund, and the goals that matter to you. Built for households earning under $200K a year. For Claude Code, the Claude app, Codex, Cursor, and any agent that reads skills.</p>
+  <div class="term" role="group" aria-label="Install command">
+    <div class="top"><span>money-ops-skills — zsh</span><button class="copy" data-copy="npx skills add CharleneTStrain/money-ops-skills">Copy</button></div>
+    <div class="body">
+      <div class="line">$ npx skills add CharleneTStrain/money-ops-skills</div>
+      <div class="line"><span class="ok">✓</span> resolved 2 skills · claude code, codex, cursor</div>
+      <div class="line"><span class="ok">✓</span> money-ops-context installed first · read by every other skill</div>
+    </div>
+  </div>
+  <div class="cta">
+    <a class="btn solid" href="#library">Browse the skills</a>
+    <a class="btn" href="https://github.com/CharleneTStrain/money-ops-skills" target="_blank" rel="noopener">View on GitHub</a>
+    <a class="btn" href="https://github.com/CharleneTStrain/money-ops-skills/issues/new?template=skill-request.yml" target="_blank" rel="noopener">Request a skill</a>
+  </div>
+  <div class="specs">
+    <div><strong>&lt;$200K</strong><span class="label">Household income</span></div>
+    <div><strong>.xlsx</strong><span class="label">Workbook you keep</span></div>
+    <div><strong>1</strong><span class="label">Shared context file</span></div>
+    <div><strong>MIT</strong><span class="label">Free to use and fork</span></div>
+  </div>
+</div></section>
+
+<section id="how"><div class="wrap">
+  <div class="sheet"><span class="label">Sheet 02 · How it works</span><span class="label">Click any skill to open it</span></div>
+  <h2>One context file. <em>Every money question.</em></h2>
+  <p class="lede">Run <span class="mono">money-ops-context</span> once. It writes down your household, income and pay schedule, expenses, debts, accounts, employer benefits, and goals. Every other skill reads that file first, so it only asks you for what's specific to the question. It never stores account numbers, Social Security numbers, or passwords.</p>
+  <div class="diagram" style="margin-top:28px">
+    <div class="dg">
+      <div class="ctx"><b>money-ops-context</b><small>.agents/money-ops-context.md · read first by every skill</small></div>
+      <div class="wires"><svg viewBox="0 0 860 44" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M430 0 V44" fill="none" stroke="currentColor" stroke-width="1.5" vector-effect="non-scaling-stroke"/></svg></div>
+      <div class="cols" id="cols"></div>
+    </div>
+  </div>
+  <div class="chains" id="chains"></div>
+</div></section>
+
+<section id="rules"><div class="wrap">
+  <div class="sheet"><span class="label">Sheet 03 · Rules</span><span class="label">Built into every skill</span></div>
+  <h2>What every skill <em>holds to</em></h2>
+  <p class="lede">The same four rules run through the whole library, so the plan you get is built on your numbers and this year's rules.</p>
+  <div class="rules" style="margin-top:28px">
+    <div class="rule"><span class="label">Rule 1</span><h3>Your numbers, not averages.</h3><p>Every answer is built from your own pay, bills, and debts. Rough is fine; made up is not.</p></div>
+    <div class="rule"><span class="label">Rule 2</span><h3>This year's limits, looked up.</h3><p>Contribution limits, credits, and loan rules change. Skills check them and cite the source.</p></div>
+    <div class="rule"><span class="label">Rule 3</span><h3>Education, not advice.</h3><p>No fund, stock, or provider picks. Skills lay out the choices. You decide.</p></div>
+    <div class="rule"><span class="label">Rule 4</span><h3>No judgment.</h3><p>Skills say where you are and the next step. Never that you're behind.</p></div>
+  </div>
+</div></section>
+
+<section id="library"><div class="wrap">
+  <div class="sheet"><span class="label">Sheet 04 · Library</span><span class="label" id="count"></span></div>
+  <h2>All <em>skills</em></h2>
+  <div class="tools" style="margin-top:24px">
+    <div id="chips" style="display:flex;gap:8px;flex-wrap:wrap" role="group" aria-label="Filter by category"></div>
+    <label class="label" for="q" style="position:absolute;left:-9999px">Search skills</label>
+    <input class="search" id="q" type="search" placeholder="Search: 401(k), debt…">
+  </div>
+  <div class="grid" id="grid"></div>
+</div></section>
+
+<section id="install"><div class="wrap">
+  <div class="sheet"><span class="label">Sheet 05 · Install</span><span class="label">Pick one</span></div>
+  <h2>Install in <em>one line</em></h2>
+  <div style="margin-top:28px">
+    <div class="tabs" role="tablist" id="tabs"></div>
+    <div class="panel" id="panel" role="tabpanel"></div>
+  </div>
+  <div class="use" id="use"></div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <div class="tb">
+    <div><span class="label">Drawn by</span><strong>Charlene Strain</strong><span style="font-size:14px;color:var(--ink-2)">Product Operations &amp; AI Workflow Automation</span></div>
+    <div><span class="label">Library</span><a href="#library">All skills</a><a href="https://github.com/CharleneTStrain/money-ops-skills/blob/main/VERSIONS.md" target="_blank" rel="noopener">Changelog</a><a href="https://charlenetstrain.github.io/product-ops-skills/" target="_blank" rel="noopener">Product Ops Skills ↗</a></div>
+    <div><span class="label">Contribute</span><a href="https://github.com/CharleneTStrain/money-ops-skills/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">Guide</a><a href="https://github.com/CharleneTStrain/money-ops-skills/issues/new?template=skill-request.yml" target="_blank" rel="noopener">Request a skill</a></div>
+    <div><span class="label">Find me</span><a href="https://www.linkedin.com/in/charlene-strain" target="_blank" rel="noopener">LinkedIn</a><a href="https://github.com/CharleneTStrain" target="_blank" rel="noopener">GitHub</a></div>
+  </div>
+  <p class="label" style="margin-top:14px">MIT license · Sheet 05 of 05</p>
+</div></footer>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" hidden role="dialog" aria-modal="true" aria-labelledby="dTitle"></aside>
+
+<script>
+const DATA = {"cats": [{"name": "Start here", "blurb": "", "ids": ["money-ops-context"]}, {"name": "Saving and debt", "blurb": "Deciding where each dollar goes when everything feels urgent.", "ids": ["retirement-debt-balance"]}], "skills": {"money-ops-context": {"id": "money-ops-context", "title": "Money ops context", "short": "Writes down your household, income, expenses, debts, accounts, benefits, and goals once, so every other skill can read it", "cat": "Start here", "what": "Create or update the household money context file every other skill in this library reads first — who is in the household, income and pay schedule, essential expenses, debts, savings and retirement accounts, employer benefits, insurance, and goals.", "when": "Use at the start before using other money ops skills, when someone says \"set up my money context,\" \"here's my financial situation,\" \"remember my debts,\" \"update my numbers,\" or \"I got a raise.\"", "problem": "Every money question starts with the same twenty questions — what you earn, how often you're paid, what you owe, what your employer matches. Answering them every time is tiring, and the answers drift.", "does": "Writes your household's money picture down once: who's in the household, income and pay schedule, essential expenses, debts, accounts, employer benefits, insurance, and goals. Every other skill reads it first. It never stores account numbers, Social Security numbers, or passwords.", "input": "a pay stub, a budget spreadsheet, a benefits guide, or just a conversation. Ranges are fine.", "get": "a one-page file at .agents/money-ops-context.md you can update whenever something changes.", "related": [["retirement-debt-balance", "uses every section to build your priority ladder"]]}, "retirement-debt-balance": {"id": "retirement-debt-balance", "title": "Retirement and debt balance", "short": "Shows where your next dollar should go between retirement, debt, an emergency fund, kids' college, and other goals", "cat": "Saving and debt", "what": "Build a priority ladder and Excel workbook showing where each dollar should go between retirement saving, debt payoff, an emergency fund, kids' college, and other goals, for households earning under $200K a year.", "when": "Use when someone asks \"should I pay off debt or save for retirement,\" \"where should my extra money go,\" \"am I saving enough,\" or \"should I take the 401(k) match or pay down my card.\"", "problem": "Every dollar has five places it could go — the credit card, the 401(k), the emergency fund, the student loan, the kids' college fund — and most advice either picks one for you or assumes you have money left over.", "does": "Builds a priority ladder from your own numbers: minimum payments, a starter cushion, the full employer match, high-interest debt, a full emergency fund, retirement, then moderate debt, dated goals, and low-rate debt. Looks up this year's limits and credits instead of guessing them. If your pay doesn't cover the basics yet, it starts with benefits and credits you may qualify for.", "input": "your take-home pay and how often you're paid, essential expenses, each debt's balance and rate, and your employer's match. Rough numbers are fine.", "get": "a one-line \"your next dollar goes here,\" plus an Excel workbook: the full ladder with per-paycheck amounts, an avalanche vs. snowball payoff schedule, editable assumptions, a what-if view, sourced limits, and a monthly check-in tab.", "related": [["money-ops-context", "reads your numbers first, and takes back any updates"]]}}};
+const REPO = "CharleneTStrain/money-ops-skills";
+const GH = "https://github.com/" + REPO + "/tree/main/skills/";
+const $ = s => document.querySelector(s);
+const cap = s => s ? s[0].toUpperCase() + s.slice(1) : s;
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const short = {"Start here":"Start here","Saving and debt":"Saving and debt"};
+
+function copyText(btn, text){
+  const done = () => { const o = btn.textContent; btn.textContent = "Copied"; setTimeout(() => btn.textContent = o, 1400); };
+  try { navigator.clipboard.writeText(text).then(done, () => fallback()); } catch(e){ fallback(); }
+  function fallback(){ const r = document.createRange(); const n = btn.closest("pre,.cmd,.term")?.querySelector("code,.line"); if(n){ r.selectNodeContents(n); const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = "Selected"; } }
+}
+document.addEventListener("click", e => { const b = e.target.closest("[data-copy]"); if(b) copyText(b, b.dataset.copy); const o = e.target.closest("[data-open]"); if(o){ e.preventDefault(); openSkill(o.dataset.open); } });
+
+/* diagram columns */
+$("#cols").innerHTML = DATA.cats.slice(1).map(c => `<div class="col"><h3>${esc(c.name)}</h3><ul>${c.ids.map(id => `<li><button data-open="${id}">${id}</button></li>`).join("")}</ul></div>`).join("");
+
+const chains = [
+  ["Get a plan for your next dollar", ["money-ops-context","retirement-debt-balance"], "Write down your numbers once, then get a priority ladder and a workbook built from them."]
+];
+$("#chains").innerHTML = chains.map(([t, ids, p]) => `<div class="chain"><span class="label">${esc(t)}</span><div class="flow">${ids.map((id,i) => `${i?'<span class="arr">→</span>':''}<button class="node" data-open="${id}">${id}</button>`).join("")}</div><p>${esc(p)}</p></div>`).join("");
+
+/* library */
+let cat = "All", q = "";
+const order = DATA.cats.flatMap(c => c.ids);
+function chips(){
+  const all = [["All", order.length], ...DATA.cats.map(c => [c.name, c.ids.length])];
+  $("#chips").innerHTML = all.map(([n,k]) => `<button class="chip" aria-pressed="${n===cat}" data-cat="${esc(n)}">${esc(short[n]||n)}<span class="n">${k}</span></button>`).join("");
+}
+$("#chips").addEventListener("click", e => { const b = e.target.closest("[data-cat]"); if(!b) return; cat = b.dataset.cat; chips(); render(); });
+$("#q").addEventListener("input", e => { q = e.target.value.trim().toLowerCase(); render(); });
+function render(){
+  const list = order.map(id => DATA.skills[id]).filter(s => (cat==="All" || s.cat===cat) && (!q || [s.id,s.title,s.short,s.what,s.when,s.problem].join(" ").toLowerCase().includes(q)));
+  $("#count").textContent = list.length + " of " + order.length + " shown";
+  $("#grid").innerHTML = list.length ? list.map(s => `<button class="card${s.id==='money-ops-context'?' start':''}" data-open="${s.id}">
+      <span class="id">${s.id}</span><h3>${esc(s.title)}</h3><p>${esc(s.short)}</p><span class="label cat">${esc(s.id==='money-ops-context'?'Start here · read by every skill':s.cat)}</span></button>`).join("")
+    : `<div class="empty">No skill matches “${esc(q)}”. <a href="https://github.com/${REPO}/issues/new?template=skill-request.yml" target="_blank" rel="noopener">Request it</a>.</div>`;
+}
+chips(); render();
+
+/* drawer */
+let lastFocus = null;
+function openSkill(id, fromHash){
+  const s = DATA.skills[id]; if(!s) return;
+  const cmd = `npx skills add ${REPO} --skill ${id}`;
+  $("#drawer").innerHTML = `<button class="copy x" id="close">Close</button>
+    <span class="label">${esc(s.cat)}</span>
+    <h2 id="dTitle">${esc(s.title)}</h2>
+    <div class="id">/${id}</div>
+    <div class="dl">
+      ${s.problem?`<div><span class="label">The problem</span><p>${esc(s.problem)}</p></div>`:""}
+      <div><span class="label">What it does</span><p>${esc(s.does||s.what)}</p></div>
+      ${s.input?`<div><span class="label">Hand it</span><p>${esc(cap(s.input))}</p></div>`:""}
+      ${s.get?`<div><span class="label">You get</span><p>${esc(cap(s.get))}</p></div>`:""}
+      ${s.when?`<div><span class="label">When the agent picks it up</span><p>${esc(s.when)}</p></div>`:""}
+    </div>
+    ${s.related.length?`<h4 class="label">Hands off to</h4><div class="rel">${s.related.map(([r,why]) => `<button data-open="${r}"><b>${r}</b><span>${esc(why)}</span></button>`).join("")}</div>`:""}
+    <h4 class="label">Install just this one</h4>
+    <div class="cmd"><code>${esc(cmd)}</code><button class="copy" data-copy="${esc(cmd)}">Copy</button></div>
+    <p style="margin-top:18px"><a class="btn" href="${GH}${id}" target="_blank" rel="noopener">Read the SKILL.md on GitHub ↗</a></p>`;
+  $("#drawer").hidden = false; $("#scrim").hidden = false; $("#drawer").scrollTop = 0;
+  $("#close").addEventListener("click", closeSkill); $("#close").focus();
+  if(location.hash !== "#" + id) history.replaceState(null, "", "#" + id);
+}
+function closeSkill(){
+  $("#drawer").hidden = true; $("#scrim").hidden = true;
+  if(DATA.skills[location.hash.slice(1)]) history.replaceState(null, "", location.pathname + location.search);
+  lastFocus?.focus?.();
+}
+$("#scrim").addEventListener("click", closeSkill);
+document.addEventListener("keydown", e => { if(e.key === "Escape" && !$("#drawer").hidden) closeSkill(); });
+document.addEventListener("focusin", e => { lastFocus = $("#drawer").hidden ? e.target : lastFocus; });
+function fromHash(){ const id = location.hash.slice(1); if(DATA.skills[id]) openSkill(id); else if(!$("#drawer").hidden) closeSkill(); }
+window.addEventListener("hashchange", fromHash); fromHash();
+
+/* install tabs */
+const tabs = [
+  ["CLI", "Recommended. Installs into whichever agents you have, and asks where.", [
+    ["# Install all skills", "npx skills add " + REPO],
+    ["# Install specific skills", "npx skills add " + REPO + " --skill money-ops-context retirement-debt-balance"],
+    ["# Running it from inside Claude Code? Name the agent", "npx skills add " + REPO + " -a claude-code"]]],
+  ["Claude Code plugin", "Inside an interactive Claude Code session:", [
+    ["", "/plugin marketplace add " + REPO + "\n/plugin install money-ops-skills"],
+    ["# Outside a session", "claude plugin marketplace add " + REPO + "\nclaude plugin install money-ops-skills@money-ops-skills"]]],
+  ["Clone", "Copy the folders yourself. Use ~/.claude/skills/ for every project, or .claude/skills/ for one.", [
+    ["", "git clone https://github.com/" + REPO + ".git\ncp -r money-ops-skills/skills/* ~/.claude/skills/"]]],
+  ["Claude app", "Zip any folder from skills/ and upload it under Customize → Skills → Upload a skill. Upload money-ops-context too, so the others have something to read.", []]
+];
+let tab = 0;
+function drawTabs(){
+  $("#tabs").innerHTML = tabs.map((t,i) => `<button class="tab" role="tab" id="tab${i}" aria-selected="${i===tab}">${t[0]}</button>`).join("");
+  const [,p,blocks] = tabs[tab];
+  $("#panel").setAttribute("aria-labelledby","tab"+tab);
+  $("#panel").innerHTML = `<p>${esc(p)}</p>` + blocks.map(([c,cmd]) => `<pre>${c?`<span class="c">${esc(c)}</span>\n`:""}<code>${esc(cmd)}</code><button class="copy" data-copy="${esc(cmd)}">Copy</button></pre>`).join("");
+}
+$("#tabs").addEventListener("click", e => { const b = e.target.closest(".tab"); if(!b) return; tab = +b.id.slice(3); drawTabs(); });
+drawTabs();
+
+const asks = [
+  ["Set up my money context from this pay stub and budget", ["money-ops-context"]],
+  ["I have $400 extra a month. Credit card or 401(k)?", ["retirement-debt-balance"]],
+  ["We just had our third kid. College fund or pay down the car?", ["retirement-debt-balance"]],
+  ["I got a raise. Update my numbers.", ["money-ops-context"]]
+];
+$("#use").innerHTML = asks.map(([a, ids]) => `<div class="ask"><span class="label">You say</span><q>${esc(a)}</q><span class="to">→ ${ids.map(id => `<a href="#${id}" data-open="${id}">${id}</a>`).join(", then ")}</span></div>`).join("");
+</script>
+
+</body>
+</html>

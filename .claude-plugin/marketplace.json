@@ -1,0 +1,18 @@
+{
+  "name": "money-ops-skills",
+  "owner": {
+    "name": "Charlene Strain",
+    "url": "https://www.linkedin.com/in/charlene-strain"
+  },
+  "metadata": {
+    "description": "Household money skills for AI agents — balancing retirement saving, debt, emergency funds, and goals, for households earning under $200K",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "money-ops-skills",
+      "description": "Household money skills plus a shared context file: a priority ladder and Excel workbook for balancing retirement saving, debt payoff, an emergency fund, kids' college, and other goals",
+      "source": "./"
+    }
+  ]
+}
