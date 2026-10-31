@@ -1,5 +1,9 @@
 # Versions
 
+## 1.1.1 — October 31, 2026
+
+- **retirement-account-order** now covers the limits of the government 457(b) penalty-free exception (rolled-in money, rollovers out to an IRA), separates nonprofit 457(b)s, adds the 457(b) special catch-up, and applies the 15-year 403(b) catch-up before the age-50 catch-up
+
 ## 1.1.0 — October 31, 2026
 
 - New skill, **retirement-account-order**: which retirement accounts to fill first (401(k), 403(b), 457(b), HSA, Roth or traditional IRA), an on-track check that counts pensions and Social Security, a fair Roth vs. traditional comparison, and a start-now calculator, delivered as an Excel workbook

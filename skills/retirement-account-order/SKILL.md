@@ -2,7 +2,7 @@
 name: retirement-account-order
 description: Build a plan and Excel workbook for which retirement accounts to fill first (401(k), 403(b), 457(b), HSA, Roth or traditional IRA), whether you're on track, and when to start, for households under $200K. Use when someone asks "how do I maximize retirement savings," "401(k) or IRA first," "Roth or traditional," "should I open an IRA," "am I on track for retirement," "am I too late to start," "what do I do with my pension," or "when should I start saving for retirement."
 metadata:
-  version: 1.0.0
+  version: 1.0.1
 ---
 
 # Retirement account order
@@ -36,7 +36,7 @@ Ask only for what the context file doesn't have, grouped, not one question at a 
 
 - **Each earner:** age, gross pay, take-home per paycheck, how many paychecks a year (52, 26, 24, 12, or 10 for some school staff)
 - **Tax filing status:** single, married filing jointly, or head of household, and their state
-- **Workplace plans for each earner:** every plan offered (401(k), 403(b), 457(b), pension), for each one: match formula, whether the match is paid per paycheck and whether the plan "trues up" at year end, vesting schedule, Roth option, after-tax contribution option, current contribution percentage, and automatic yearly increases
+- **Workplace plans for each earner:** every plan offered (401(k), 403(b), 457(b), pension), whether a 457(b) is from a government employer or a nonprofit, and for each one: match formula, whether the match is paid per paycheck and whether the plan "trues up" at year end, vesting schedule, Roth option, after-tax contribution option, current contribution percentage, and automatic yearly increases
 - **Pension, if any:** required contribution taken from pay, years of service, and the estimated monthly benefit from their latest pension statement
 - **Social Security:** their estimated benefit from their Social Security statement, and whether their job pays into Social Security
 - **HSA:** is their health plan HSA-eligible, does the employer contribute, and can they pay routine medical bills from cash
@@ -52,6 +52,7 @@ Limits and rules change every year. Search for the current year's values; never 
 
 - 401(k)/403(b) employee limit, 457(b) limit (separate from the 401(k)/403(b) limit), and the total limit including employer and after-tax money
 - Catch-up amounts for age 50+, any higher catch-up for specific ages, and the 403(b) catch-up for long-time employees of certain employers
+- The government 457(b) special catch-up for the three years before the plan's normal retirement age, and how it interacts with the age-50 catch-up
 - Whether catch-up contributions must go in as Roth above a certain income
 - IRA limit, IRA catch-up, and the deadline for prior-year IRA contributions
 - Roth IRA income limits by filing status
@@ -74,7 +75,9 @@ Fill each step before moving extra money to the next one. For two earners, run t
 1. **Workplace plan up to the full match.** The match is an instant 50% or 100% return. Show the exact percentage of pay needed to get all of it, per earner. If they're likely to leave before the match vests, show what that does to its value. **No match?** Skip this step. If they have a pension instead, note that the pension is their employer's contribution.
 2. **HSA, only if eligible and they can pay routine medical bills from cash.** Money goes in tax-free, grows tax-free, and comes out tax-free for medical costs; after 65 it can be used for anything, taxed like a traditional account. Tell them to keep receipts for medical bills they pay from cash, since those can be reimbursed later. If they'd spend the HSA every year, treat it as a medical account, not retirement savings, and move this step after the IRA.
 3. **IRA up to the limit.** Roth or traditional, following step 5. An IRA usually offers more fund choices and lower costs than a workplace plan.
-4. **Back to the workplace plans.** Raise contributions until each reaches its limit or the amount they can afford. **Public employees with both a 403(b) and a 457(b)** can contribute up to the limit in each, nearly double the room. Money in a 457(b) can be taken out after leaving that job without the usual early-withdrawal penalty, which makes it useful for early retirement.
+4. **Back to the workplace plans.** Raise contributions until each reaches its limit or the amount they can afford. **Public employees with both a 403(b) and a 457(b)** can contribute up to the limit in each, double the room. Money in a government 457(b) can be taken out after leaving that job, at any age, without the usual 10% early-withdrawal penalty, which makes it useful for early retirement. Two exceptions: money rolled into the 457(b) from another plan or an IRA keeps the penalty, and money moved out of the 457(b) into an IRA follows IRA rules and loses the exception.
+   - **Nonprofit 457(b)s work differently.** They can't be rolled into an IRA or other plan the same way, and the money can be reached by the employer's creditors. Flag the difference and don't apply the government 457(b) advice to them.
+   - **Catch-ups:** the 15-year 403(b) catch-up needs 15 years of full-time service with the same eligible employer (such as a public school system) and a plan that allows it. Deferrals above the standard limit count toward it first, then toward the age-50 catch-up. A government 457(b)'s special catch-up for the three years before the plan's normal retirement age can't be stacked with the age-50 catch-up in the same plan; use whichever allows more.
 5. **After-tax workplace contributions, if the plan allows them** and also allows converting them to Roth. See step 6.
 6. **Anything beyond that** goes to a regular investment account, or toward other goals in **retirement-debt-balance**.
 
@@ -150,7 +153,7 @@ Label all growth figures as estimates at a stated return, not promises.
 
 Raise any that apply:
 
-- **Old 401(k)s from past jobs:** list each one. Moving them into an IRA or the current employer's plan keeps them growing and in one place; cashing out usually costs taxes and penalties. If a backdoor Roth is in play, the workplace plan is usually the better home for pre-tax money.
+- **Old 401(k)s from past jobs:** list each one. Moving them into an IRA or the current employer's plan keeps them growing and in one place; cashing out usually costs taxes and penalties. If a backdoor Roth is in play, the workplace plan is usually the better home for pre-tax money. If the current plan is a government 457(b), note that rolled-in money doesn't get the 457(b)'s penalty-free access, and that rolling 457(b) money out to an IRA gives that access up.
 - **Auto-enrollment:** default contribution rates are often below the match. Check theirs.
 - **Changing jobs soon:** check vesting before leaving.
 - **401(k) loans and early withdrawals:** a last resort.
@@ -173,7 +176,7 @@ Load the xlsx skill before building. Create these tabs:
 Workbook rules:
 
 - No typed-in numbers inside formulas. Every value comes from Inputs, Assumptions or Limits & Sources.
-- Flag in red: any contribution over its limit, a shared HSA family limit exceeded across spouses, a total over the money available, or a contribution pace that hits the limit before the last paycheck when the match is per paycheck.
+- Flag in red: any contribution over its limit, a 457(b) special catch-up stacked with the age-50 catch-up in the same plan, a shared HSA family limit exceeded across spouses, a total over the money available, or a contribution pace that hits the limit before the last paycheck when the match is per paycheck.
 - Estimated inputs and placeholders are visibly marked.
 - Readable on a phone: large text on Start Here, key numbers on the first screen.
 - Mention that the file opens in Google Sheets too.
