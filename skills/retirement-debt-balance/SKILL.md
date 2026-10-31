@@ -2,7 +2,7 @@
 name: retirement-debt-balance
 description: Build a priority ladder and Excel workbook showing where each dollar should go between retirement saving, debt payoff, an emergency fund, kids' college, and other goals, for households earning under $200K a year. Use when someone asks "should I pay off debt or save for retirement," "where should my extra money go," "am I saving enough," "should I take the 401(k) match or pay down my card," or wants a plan for balancing money priorities.
 metadata:
-  version: 1.0.0
+  version: 1.0.1
 ---
 
 # Balancing retirement saving, debt and other priorities
@@ -189,3 +189,4 @@ If the person gave numbers the context file doesn't have, or that differ from it
 ## Related skills
 
 - **money-ops-context** — reads the household's numbers first, and takes back any updates this skill learns
+- **retirement-account-order** — once retirement is the next rung, decides which accounts to fill and Roth vs. traditional

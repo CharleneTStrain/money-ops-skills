@@ -1,5 +1,11 @@
 # Versions
 
+## 1.1.0 — October 31, 2026
+
+- New skill, **retirement-account-order**: which retirement accounts to fill first (401(k), 403(b), 457(b), HSA, Roth or traditional IRA), an on-track check that counts pensions and Social Security, a fair Roth vs. traditional comparison, and a start-now calculator, delivered as an Excel workbook
+- **money-ops-context** now records pensions and Social Security estimates
+- **retirement-debt-balance** and **money-ops-context** link to the new skill
+
 ## 1.0.0 — October 31, 2026
 
 First packaged release.

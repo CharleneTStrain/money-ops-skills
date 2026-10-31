@@ -6,12 +6,12 @@
   },
   "metadata": {
     "description": "Household money skills for AI agents — balancing retirement saving, debt, emergency funds, and goals, for households earning under $200K",
-    "version": "1.0.0"
+    "version": "1.1.0"
   },
   "plugins": [
     {
       "name": "money-ops-skills",
-      "description": "Household money skills plus a shared context file: a priority ladder and Excel workbook for balancing retirement saving, debt payoff, an emergency fund, kids' college, and other goals",
+      "description": "Household money skills plus a shared context file: a priority ladder for balancing retirement saving, debt, an emergency fund, kids' college and other goals, plus a retirement account plan for 401(k), 403(b), 457(b), HSA and Roth or traditional IRA, each with an Excel workbook",
       "source": "./"
     }
   ]

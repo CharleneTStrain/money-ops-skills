@@ -39,8 +39,13 @@ Everything starts with **money-ops-context**. Run it once and it writes `.agents
                 │      Saving and debt      │
                 ├───────────────────────────┤
                 │  retirement-debt-balance  │
+                │  retirement-account-order │
                 └───────────────────────────┘
 ```
+
+Skills hand off to each other. The chain that comes up most:
+
+- **Retirement and debt balance → Retirement account order:** decide whether retirement is the next step, then decide which accounts to fill
 
 Each skill ends with a **Related skills** section naming what it hands off to and why.
 
@@ -66,6 +71,7 @@ Deciding where each dollar goes when everything feels urgent.
 | Skill | What it does | Output |
 |---|---|---|
 | [Retirement and debt balance](skills/retirement-debt-balance/) | Builds a priority ladder for retirement saving, debt payoff, an emergency fund, kids' college, and other goals | Excel workbook: ladder, per-paycheck amounts, payoff schedule, assumptions, monthly check-in |
+| [Retirement account order](skills/retirement-account-order/) | Puts your 401(k), 403(b), 457(b), HSA and IRA in order, compares Roth and traditional, and checks whether you're on track | Excel workbook: account order per paycheck, Roth vs. traditional, on-track check, start-now calculator |
 
 More skills coming.
 
@@ -80,7 +86,7 @@ Use [`npx skills`](https://github.com/vercel-labs/skills) to install into whiche
 npx skills add CharleneTStrain/money-ops-skills
 
 # Install specific skills
-npx skills add CharleneTStrain/money-ops-skills --skill money-ops-context retirement-debt-balance
+npx skills add CharleneTStrain/money-ops-skills --skill money-ops-context retirement-account-order
 
 # See what's available
 npx skills add CharleneTStrain/money-ops-skills --list
@@ -137,8 +143,11 @@ Once installed, ask in plain words:
 "We just had our third kid. Should we start a college fund or keep paying down the car?"
 → retirement-debt-balance
 
-"I got a raise. Update my numbers."
-→ money-ops-context
+"I'm 26, a teacher with a pension. Should I open a Roth IRA too?"
+→ retirement-account-order
+
+"I'm 54 and 10 years from retiring. Am I on track?"
+→ retirement-account-order
 ```
 
 Or call one directly:
@@ -146,6 +155,7 @@ Or call one directly:
 ```
 /money-ops-context
 /retirement-debt-balance
+/retirement-account-order
 ```
 
 ## Contributing
