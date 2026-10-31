@@ -1,5 +1,9 @@
 # Versions
 
+## 1.3.1 — October 31, 2026
+
+- **market-downturn-plan** updated for current rules: the 2026 marketplace health subsidy cliff (Roth conversions and job-loss income can end the subsidy entirely), I bonds as online-only and locked for the first year, the federal tips deduction for 2025 through 2028, money market funds covered by SIPC rather than FDIC, and the tax on in-kind required withdrawals
+
 ## 1.3.0 — October 31, 2026
 
 - New skill, **market-downturn-plan**: sorts savings into three buckets by when the money is needed, checks downturn risks (income loss, concentration, speculation, insurance gaps, fraud), runs drop tests including stocks and bonds falling together, and writes signed "My investment rules," delivered as an Excel workbook

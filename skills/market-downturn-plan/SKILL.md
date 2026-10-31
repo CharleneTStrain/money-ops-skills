@@ -2,7 +2,7 @@
 name: market-downturn-plan
 description: Build a written plan and Excel workbook for protecting savings, retirement accounts and income during market drops and economic uncertainty, for households earning under $200K. Use when someone asks "how do I protect my investments in a downturn," "should I sell before it gets worse," "the market is dropping, what do I do," "is my 401(k) safe," "am I too exposed," "what if I lose my job in a recession," or wants a plan before the next crash.
 metadata:
-  version: 1.0.0
+  version: 1.0.1
 ---
 
 # Market downturn plan
@@ -57,7 +57,7 @@ If they don't know what they're invested in, the first action is finding out. Te
 
 This is the core of the plan. Put every dollar in one of three buckets:
 
-1. **Needed within 2 years:** emergency fund, planned big expenses, and, for retirees, the next 1–2 years of withdrawals. Keep it in cash or near-cash (savings, money market funds, CDs, Treasury bills). A market drop shouldn't be able to touch it.
+1. **Needed within 2 years:** emergency fund, planned big expenses, and, for retirees, the next 1–2 years of withdrawals. Keep it in cash or near-cash (savings, money market funds, CDs, Treasury bills). A market drop shouldn't be able to touch it. Note that money market funds at a brokerage aren't FDIC-insured: they're treated as securities, covered by SIPC only if the brokerage itself fails, and they're still a reasonable place for this money. I bonds don't belong here, since they can't be cashed in their first year.
 2. **Needed in 2–5 years:** a house down payment, college starting soon, early retirement years. Match each amount to its date with CDs or Treasuries that mature around when the money is needed. Bond funds can fall when interest rates rise, so they're a weaker fit for money with a fixed date.
 3. **Needed in 5+ years:** most retirement savings for anyone not close to retiring. This money can stay invested through a drop, because there's time for markets to recover.
 
@@ -84,15 +84,15 @@ Rules, limits, rates and history change. Search for current values; never state 
 - SIPC coverage for brokerage accounts, and what it does and doesn't cover (a broker failing, not market losses)
 - State insurance guaranty association limits for annuities and life insurance in their state
 - Current yields on savings, CDs and Treasury bills, as ranges, without naming providers
-- Current rules for TIPS and I bonds (inflation-protected bonds from the U.S. government), including any purchase limits
+- Current rules for TIPS and I bonds (inflation-protected bonds from the U.S. government): purchase limits (I bonds are bought online only), how long I bonds must be held before cashing, and the interest given up if cashed early
 - A published, sourced history of past stock market declines and how long recoveries took
 - A published, sourced history of a year when stocks and bonds fell together, such as 2022
 - A published, sourced study on the cost of missing the market's best days
 - Wash-sale rules, including purchases in IRAs and automatic reinvestment, and the capital loss deduction limit
-- Roth conversion rules, and income-based Medicare premium surcharges and marketplace health subsidy limits that a conversion could affect
+- Roth conversion rules, income-based Medicare premium surcharges, and current marketplace health subsidy rules, including whether an income cliff applies this year (in 2026, going even $1 over 400% of the federal poverty line ends the subsidy) and whether Congress has changed it
 - Required minimum distribution rules and the current starting age
 - The "rule of 55" for workplace plans, and 401(k) hardship withdrawal and loan rules
-- Unemployment benefit basics for their state, health coverage options after a job loss (COBRA and marketplace plans), and current federal tax treatment of tips if they earn tips
+- Unemployment benefit basics for their state, health coverage options after a job loss (COBRA and marketplace plans), and the current federal tax treatment of tips (including the tips deduction for 2025 through 2028, its limit and income phaseout) if they earn tips
 - Current regulator warnings about investment scams (SEC, FINRA, their state securities regulator)
 
 Every figure goes in the workbook's Limits & Sources tab with the year, the source name and the link. Cite the most useful sources in chat.
@@ -108,7 +108,7 @@ Work through each risk with their numbers. Flag the ones that apply, most seriou
 - **Speculation.** Crypto, single-stock bets, options and leveraged funds can fall much further than the market. Show what a 50% to 80% drop would mean in dollars. Keep speculative money to an amount they could lose without changing their life.
 - **Borrowing to invest.** Margin and leveraged positions can force a sale at the worst moment. Flag any of it as a top risk.
 - **A mix that doesn't match their timeline.** Compare their current stock-bond-cash mix with what their buckets need. If they hold a target-date fund, check that its year matches when they actually plan to retire, and explain that it already shifts toward bonds over time.
-- **Inflation.** Cash and bonds lose buying power when prices rise. Note how much of their long-term money sits in cash, and where TIPS or I bonds could help.
+- **Inflation.** Cash and bonds lose buying power when prices rise. Note how much of their long-term money sits in cash, and where TIPS or I bonds could help for money needed in more than a year.
 - **Variable-rate debt.** Payments can rise when rates move.
 - **Deposits over the insurance limit** at one institution.
 - **High fees.** Fees take the same cut in down years as up years.
@@ -139,7 +139,7 @@ Turn the plan into rules they decide now, while calm. Use their numbers in every
 
 **Optional moves, only if they fit**
 - **Tax-loss harvesting** in a taxable brokerage account: selling a fund at a loss and buying a similar but not identical one, to lower taxes. Explain the wash-sale rule fully: buying the same fund within the window in any account, including an IRA, or through automatic dividend reinvestment or 401(k) contributions, can cancel the loss. A loss canceled by an IRA purchase is gone for good. Turn off automatic reinvestment in the taxable account first.
-- **Roth conversions** while balances are down: moving money from a traditional account to a Roth means paying tax on a smaller amount. Show the tax cost with their numbers, plus the side effects: higher income can raise Medicare premiums two years later and shrink marketplace health subsidies for early retirees. Suggest a tax professional before doing it.
+- **Roth conversions** while balances are down: moving money from a traditional account to a Roth means paying tax on a smaller amount. Show the tax cost with their numbers, plus the side effects: higher income can raise Medicare premiums two years later, and for early retirees on a marketplace health plan it can reduce the subsidy or, past an income cliff, end it entirely. Check the conversion amount against the looked-up cliff before suggesting it. Suggest a tax professional before doing it.
 - **Raising cash ahead of a known need** (a house purchase next year) is planning, not market timing. Do it on the bucket schedule, not in reaction to headlines.
 
 ## 8. Run the drop test
@@ -171,18 +171,20 @@ Cover whichever apply.
 - **Refill rule for the cash bucket:** top it back up from stocks only in years when stocks are up, or at or above the level of the last refill; in down years, live from cash and bonds and leave stocks alone.
 - **Flexible spending:** set a simple guardrail now, such as trimming withdrawals by 10% in any year the portfolio is down more than a set amount. A small cut in bad years protects the plan more than almost anything else.
 - **Social Security timing:** delaying a claim raises the monthly benefit for life and can be a lever; covering early years from savings so the claim can wait is one approach. Refer the claiming decision itself to a professional.
-- **Required withdrawals:** if they're old enough for required minimum distributions, plan which holdings to withdraw from in a down year (cash or bonds first, or move shares in kind to a taxable account rather than selling, where allowed).
+- **Required withdrawals:** if they're old enough for required minimum distributions, plan which holdings to withdraw from in a down year: cash or bonds first, or move shares in kind to a taxable account rather than selling, where the provider allows it. The tax bill is the same either way; moving shares just avoids selling low. Pay the tax from money outside the IRA if they can.
+- **Marketplace health coverage before 65:** retirees buying their own coverage should check every withdrawal and conversion against the looked-up subsidy income cliff.
 
 **Early in their career or without a workplace plan**
 - **Income is the real risk.** Tipped, hourly and gig work often shrink first in a recession. Build cash first: a high-yield savings account sized to a low month, not an average one.
 - **Living with family or with low bills is a window.** Show how fast their emergency fund and savings could grow at current expenses.
-- **A Roth IRA works with tip income,** as long as the tips are reported. Show what a small amount per shift adds up to.
+- **Report every tip.** Reported tips count as earned income for a Roth IRA, build future Social Security and unemployment benefits, and, through 2028, qualify for a federal income tax deduction (look up the current limit). Unreported cash tips get none of that.
+- **A Roth IRA fits tip income well.** With the tips deduction lowering their taxable income, paying tax now and taking money out tax-free later is usually the better deal. Show what a small amount per shift adds up to.
 - **For someone decades from retirement, a downturn is a long sale.** Regular contributions during a drop buy more for the same money.
 - **Speculative holdings get a size limit,** set in dollars they could lose without missing rent.
 
 **A job loss during the downturn**
 - File for unemployment right away; give their state's starting point.
-- Health coverage: compare COBRA with a marketplace plan; losing a job usually opens a special enrollment window.
+- Health coverage: compare COBRA with a marketplace plan; losing a job usually opens a special enrollment window. Marketplace subsidies depend on the year's total income, and unemployment pay, severance and retirement withdrawals all count. Check the estimate against the looked-up subsidy cliff before taking any withdrawal.
 - Keep the old 401(k) where it is or roll it into an IRA; never cash it out by default. Explain the rule of 55 for anyone leaving a job in or after the year they turn 55, from current rules.
 - Order of money to use: emergency fund, then cutting expenses, then taxable investments, with retirement accounts last.
 - Hand off to **retirement-debt-balance** to re-sort priorities on lower income.
